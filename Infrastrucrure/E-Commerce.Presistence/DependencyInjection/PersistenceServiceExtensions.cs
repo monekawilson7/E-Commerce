@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Presistence.Context;
 using E_Commerce.Presistence.DbInitializers;
+using E_Commerce.Presistence.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ public static class PersistenceServiceExtensions
             var connection = configuration.GetConnectionString("SQLConnection");
             options.UseSqlServer(connection);
         });
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IDbInitializer,DbInitializer>();
         return services;
     }

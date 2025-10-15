@@ -45,6 +45,7 @@ internal class DbInitializer(ApplicationDbContext dbContext)
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.InnerException?.Message);
             throw;
         }
 
