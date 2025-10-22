@@ -36,7 +36,7 @@ namespace E_Commerce.web
             app.UseAuthorization();
 
 
-            app.MapControllers();
+           // app.MapControllers();
 
             app.Run();
         }

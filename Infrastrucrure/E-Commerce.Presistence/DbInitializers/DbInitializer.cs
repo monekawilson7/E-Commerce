@@ -26,14 +26,14 @@ internal class DbInitializer(ApplicationDbContext dbContext)
 
                 await dbContext.SaveChangesAsync();
             }
-            //if (!dbContext.ProductTypes.Any())
-            //{
-            //    var TypesData = await File.ReadAllTextAsync("../E-Commerce.Presistence/SeedData/types.json");
-            //    var Types = JsonSerializer.Deserialize<List<ProductType>>(TypesData);
-            //    if (Types is not null && Types.Any())
-            //        dbContext.ProductTypes.AddRange(Types);
-            //    await dbContext.SaveChangesAsync();
-            //}
+            if (!dbContext.ProductTypes.Any())
+            {
+                var TypesData = await File.ReadAllTextAsync("C:\\Users\\DELL\\source\\repos\\E-Commerce\\Infrastrucrure\\E-Commerce.Presistence\\Context\\DataSeed\\types.json");
+                var Types = JsonSerializer.Deserialize<List<ProductType>>(TypesData);
+                if (Types is not null && Types.Any())
+                    dbContext.ProductTypes.AddRange(Types);
+                await dbContext.SaveChangesAsync();
+            }
             if (!dbContext.Products.Any())
             {
                 var ProductsData = await File.ReadAllTextAsync("C:\\Users\\DELL\\source\\repos\\E-Commerce\\Infrastrucrure\\E-Commerce.Presistence\\Context\\DataSeed\\products.json");
