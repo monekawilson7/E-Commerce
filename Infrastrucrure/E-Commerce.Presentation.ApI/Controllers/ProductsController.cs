@@ -1,6 +1,7 @@
 ﻿using E_Commerce.ServiceAbstraction;
 using E_Commerce.Shared.DataTransferObjects;
 using E_Commerce.Shared.DataTransferObjects.Products;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -19,7 +20,11 @@ public class ProductsController (IProductService service)
     public async Task<ActionResult<ProductResponse>> Get(int id, CancellationToken cancellationToken = default)
     {
         var response = await service.GetByIdAsync(id,cancellationToken);
-        return Ok(response);
+        return response is not null ? Ok(response): NotFound(new ProblemDetails { 
+        Detail = $"Product with id {id} was not found",
+        Status=StatusCodes.Status404NotFound,
+        Title= "Product Not Found"
+        });
     }
     [HttpGet("Brands")]
     public async Task<ActionResult<IEnumerable<BrandRespose>>> GetBrands(CancellationToken cancellationToken = default)
