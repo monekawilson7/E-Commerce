@@ -4,6 +4,7 @@ using E_Commerce.Domain.Entities.Products;
 using E_Commerce.Service.Exceptions;
 using E_Commerce.Service.Specifications;
 using E_Commerce.ServiceAbstraction;
+using E_Commerce.ServiceAbstraction.Common;
 using E_Commerce.Shared.DataTransferObjects;
 using E_Commerce.Shared.DataTransferObjects.Products;
 
@@ -17,12 +18,16 @@ internal class ProductService(IUnitOfWork UnitOfWork, IMapper mapper) : IProduct
         return mapper.Map<IEnumerable<BrandRespose>>(brands);
     }
 
-    public async Task<ProductResponse?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Result<ProductResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var product = await UnitOfWork.GetRepository<Product,int>()
             .GetASync(new ProductWithBrandTypeSpecification(id) , cancellationToken)?? 
             throw new ProductNotFoundException(id);
-        return mapper.Map<ProductResponse>(product);
+        if (product == null)
+        {
+            return Error.NotFound();
+        }
+        return Result<ProductResponse>.Ok(mapper.Map<ProductResponse>(product));
     }
 
     public async Task<PaginatedResult<ProductResponse>> GetProductsAsync(ProductQueryParameters parameters, CancellationToken cancellationToken = default)
@@ -43,4 +48,5 @@ internal class ProductService(IUnitOfWork UnitOfWork, IMapper mapper) : IProduct
      .GetAllAysnc(cancellationToken);
         return mapper.Map<IEnumerable<TypeRespose>>(types);
     }
+
 }

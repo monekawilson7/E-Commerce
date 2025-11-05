@@ -2,17 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>E_Commerce.Presentation.ApI</RootNamespace>
+    <RootNamespace>E-Commerce.Infrastructure.Service</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\E-Commerce.ServiceAbstraction\E-Commerce.ServiceAbstraction.csproj" />
+    <ProjectReference Include="..\..\Core\E-Commerce.Service\E-Commerce.Service.csproj" />
   </ItemGroup>
 
 </Project>

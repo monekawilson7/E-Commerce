@@ -11,7 +11,8 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IBasketService, BasketService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-       
+        services.AddScoped<IAuthService, AuthSevice>();
+
         return services;
     }
 }

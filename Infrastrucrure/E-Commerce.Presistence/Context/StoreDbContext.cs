@@ -1,7 +1,11 @@
-﻿using System.Reflection;
+﻿using E_Commerce.Domain.Entities.Auth;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Reflection;
 
 namespace E_Commerce.Presistence.Context;
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class StoreDbContext(DbContextOptions<StoreDbContext> options) 
+    : DbContext(options)
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductBrand> ProductBrands { get; set; }
@@ -10,5 +14,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
     }
 }

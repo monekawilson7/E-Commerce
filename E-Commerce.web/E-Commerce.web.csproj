@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infrastrucrure\E-Commerce.Infrastrucrure.Service\E-Commerce.Infrastructure.Service.csproj" />
     <ProjectReference Include="..\Infrastrucrure\E-Commerce.Presentation.ApI\E-Commerce.Presentation.ApI.csproj" />
     <ProjectReference Include="..\Infrastrucrure\E-Commerce.Presistence\E-Commerce.Persistence.csproj" />
   </ItemGroup>
