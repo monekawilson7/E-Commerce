@@ -9,9 +9,12 @@ public static class ApplicationServiceExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IBasketService, BasketService>();
+        services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-       
+        services.AddScoped<IAuthService, AuthSevice>();
+        services.AddScoped<IUserService, UserService>();
+
         return services;
     }
 }

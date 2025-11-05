@@ -2,7 +2,7 @@
 using E_Commerce.Presistence.Context;
 
 namespace E_Commerce.Presistence.Repositories;
-internal class UnitOfWork(ApplicationDbContext dbContext) 
+internal class UnitOfWork(StoreDbContext dbContext) 
     : IUnitOfWork
 {
 

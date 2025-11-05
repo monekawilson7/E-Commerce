@@ -3,7 +3,7 @@ using E_Commerce.Domain.Entities;
 using E_Commerce.Presistence.Context;
 
 namespace E_Commerce.Presistence.Repositories;
-internal class Repository<TEntity, TKey>(ApplicationDbContext dbContext) :
+internal class Repository<TEntity, TKey>(StoreDbContext dbContext) :
     IRepository<TEntity, TKey>
    where TEntity : Entity<TKey>
 {
