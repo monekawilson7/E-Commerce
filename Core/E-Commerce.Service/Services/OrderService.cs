@@ -68,4 +68,29 @@ internal class OrderService(IUnitOfWork unitOfWork,
         await unitOfWork.SaveChangesAysnc();
         return mapper.Map<OrderResponse>(order);
     }
+
+    public async Task<Result<OrderResponse>> GetByIdAsync(Guid id)
+    {
+        var order = await unitOfWork.GetRepository<Order, Guid>()
+            .GetASync(new OrderByIdSpecification(id));
+        if(order == null)
+            return Error.NotFound("Order not found", 
+                $"Order with Id {id} was not found");
+        return mapper.Map<OrderResponse>(order);
+    }
+
+    public async Task<IEnumerable<OrderResponse>> GetByUserEmailAsync(string email)
+    {
+        var orders = await unitOfWork.GetRepository<Order, Guid>()
+            .GetAllAysnc(new OrderByEmailSpecifications(email));
+
+        return mapper.Map<IEnumerable<OrderResponse>>(orders);
+    }
+
+    public async Task<IEnumerable<DeliveryMethodResponse>> GetDeliveryMethodsAsync()
+    {
+        var methods = await unitOfWork.GetRepository<DeliveryMethod, int>()
+            .GetAllAysnc();
+        return mapper.Map<IEnumerable<DeliveryMethodResponse>>(methods);
+    }
 }

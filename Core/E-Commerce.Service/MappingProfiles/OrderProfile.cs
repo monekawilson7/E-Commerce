@@ -23,6 +23,9 @@ internal class OrderProfile
             o => o.MapFrom(s => s.product.ProductId))
             .ForMember(d => d.Name,
             o => o.MapFrom(s => s.product.Name));
+        CreateMap<DeliveryMethod, DeliveryMethodResponse>()
+            .ForMember(d=> d.Cost,
+            o=>o.MapFrom(s=>s.Price));
 
     }
 }
